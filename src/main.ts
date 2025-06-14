@@ -1,8 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+import { ValidationExceptionFilter } from './exceptions/badRequest.exception';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Validation pipe for validation errors
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // strips properties not in DTO
+      forbidNonWhitelisted: true, // throws error if extra properties are present
+      transform: true,
+    }),
+  );
+
+  // Custom message on BadRequestError
+  app.useGlobalFilters(new ValidationExceptionFilter());
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
