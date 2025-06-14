@@ -15,7 +15,7 @@ async function bootstrap() {
     }),
   );
 
-  // Custom message on BadRequestError
+  // Custom message on Any type of exception
   app.useGlobalFilters(new AllExceptionsFilter());
 
   await app.listen(process.env.PORT ?? 3000);
