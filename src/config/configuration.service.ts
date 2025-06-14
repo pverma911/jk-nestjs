@@ -10,26 +10,30 @@ export class ConfigurationService {
     constructor (private readonly configService: ConfigService) { }
 
     get appPort(): number {
-        return this.configService.get<string>("PORT") ? Number(this.configService.get<string>("PORT")) : 8080
+        return <string> this.configService.get<string>("PORT") ? Number(this.configService.get<string>("PORT")) : 8080
     }
 
-    get dbHost(): string | undefined {
-        return this.configService.get<string>("DB_HOST");
+    get dbHost(): string {
+        return <string> this.configService.get<string>("DB_HOST");
     }
 
-    get dbName(): string | undefined {
-        return this.configService.get<string>("DB_NAME");
+    get dbName(): string {
+        return <string> this.configService.get<string>("DB_NAME");
     }
 
     get dbPort(): number {
-        return this.configService.get<string>("DB_PORT") ? Number(this.configService.get<string>("DB_PORT")) : 5432
+        return <string> this.configService.get<string>("DB_PORT") ? Number(this.configService.get<string>("DB_PORT")) : 5432
     }
 
-    get dbUserName(): string | undefined {
-        return this.configService.get<string>("DB_USER");
+    get dbUserName(): string {
+        return <string> this.configService.get<string>("DB_USER");
     }
 
-    get dbPassword(): string | undefined {
-        return this.configService.get<string>("DB_PASSWORD");
+    get dbPassword(): string {
+        return <string> this.configService.get<string>("DB_PASSWORD");
+    }
+
+    get jwtSecret(): string {
+        return <string> this.configService.get<string>("JWT_SECRET");
     }
 }

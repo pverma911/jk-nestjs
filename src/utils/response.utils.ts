@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { IServiceResponse } from 'src/interfaces/serviceResponse.interface';
 
 @Injectable()
 export class ResponseService {
@@ -8,7 +9,7 @@ export class ResponseService {
         return !this.errorStatusCodes.includes(statusCode);
     }
 
-    serviceResponse(statusCode: number, data: any, message?: string) {
+    serviceResponse(statusCode: number, data: any, message: string): IServiceResponse {
         return {
             statusCode,
             success: this.isSuccess(statusCode),
