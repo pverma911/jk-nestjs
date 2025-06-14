@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Response } from 'express';
 
 @Injectable()
 export class ResponseService {
@@ -11,8 +10,8 @@ export class ResponseService {
 
     serviceResponse(statusCode: number, data: any, message?: string) {
         return {
-            success: this.isSuccess(statusCode),
             statusCode,
+            success: this.isSuccess(statusCode),
             message,
             data,
         };

@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { ValidationExceptionFilter } from './exceptions/badRequest.exception';
+import { AllExceptionsFilter } from './exceptions/badRequest.exception';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,7 +16,7 @@ async function bootstrap() {
   );
 
   // Custom message on BadRequestError
-  app.useGlobalFilters(new ValidationExceptionFilter());
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   await app.listen(process.env.PORT ?? 3000);
 }
