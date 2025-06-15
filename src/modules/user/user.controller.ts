@@ -7,6 +7,9 @@ import { CurrentUser } from 'src/decorators/user.decorator';
 import { User } from 'src/entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/role.decorator';
+import { UserRole } from './user.enum';
 
 /**
  * User Controller
@@ -24,8 +27,9 @@ export class UserController {
     async login(@Body() loginDto: LoginDto) {
         return await this.userService.login(loginDto);
     }
-    
-    @UseGuards(JwtAuthGuard)
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     @Patch(':id/role')
     async updateRole(@Param('id') userId: string, @Body() updateRoleDto: UpdateRoleDto) {
         return await this.userService.updateRole(userId, updateRoleDto);
@@ -34,6 +38,6 @@ export class UserController {
     @UseGuards(JwtAuthGuard)
     @Get("/role")
     async getRole(@CurrentUser("role") role: string) {
-        return await this.userService.getUserRole(role);
+        return this.userService.getUserRole(role);
     }
 }

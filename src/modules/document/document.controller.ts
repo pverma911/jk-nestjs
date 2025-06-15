@@ -9,13 +9,19 @@ import { User } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
 import { Response } from 'express';
 import { UpdateDocumentDto } from './dto/updateDocument.dto';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/role.decorator';
+import { UserRole } from '../user/user.enum';
 
-
+/**
+ * Document Controller
+ */
 @Controller('documents')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class DocumentController {
   constructor (private readonly documentService: DocumentService) { }
 
+  @Roles(UserRole.EDITOR)
   @Post("/upload")
   @UseInterceptors(
     FileInterceptor('file', {
@@ -32,21 +38,25 @@ export class DocumentController {
     return this.documentService.upload(file, user);
   }
 
+  @Roles(UserRole.VIEWER)
   @Get("/my")
   findMyDocuments(@CurrentUser("id") userId: string) {
     return this.documentService.findMyDocuments(userId);
   }
 
+  @Roles(UserRole.EDITOR)
   @Delete("/:id")
   delete(@Param("id") id: string) {
     return this.documentService.delete(id);
   }
 
+  @Roles(UserRole.VIEWER)
   @Get("/:id")
   fetchFile(@Param("id") id: string, @Res({ passthrough: true }) res: Response) {
     return this.documentService.fetchFile(id, res);
   }
 
+  @Roles(UserRole.EDITOR)
   @Patch("/:id")
   update(@Param("id") id: string, @Body() updateDocumentDto: UpdateDocumentDto) {
     return this.documentService.update(id, updateDocumentDto);
