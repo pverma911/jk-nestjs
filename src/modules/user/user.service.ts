@@ -93,7 +93,17 @@ export class UserService extends ResponseService {
         return this.serviceResponse(HttpStatus.OK, {}, "User role has been updated")
     }
 
-    async getUserRole(role: string) {
+    async getUserById(id:string){
+        return this.userRepo.findById(id);
+    }
+
+    /**
+ * Retrieves the user's role and returns a standardized service response.
+ *
+ * @param {string} role - The role of the user to be returned in the response.
+ * @returns {Promise<object>} A promise that resolves to a service response containing the user's role and a success message.
+ */
+    getUserRole(role: string) {
         return this.serviceResponse(HttpStatus.OK, { role }, "User role has been updated")
     }
 }

@@ -1,12 +1,16 @@
-import { Controller, Get, Post, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Param, UseInterceptors, UploadedFile, UseGuards, Delete } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import crypto from "crypto"
+import * as crypto from "crypto"
+import { CurrentUser } from 'src/decorators/user.decorator';
+import { User } from 'src/entities/user.entity';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
 
 
 @Controller('documents')
+@UseGuards(JwtAuthGuard)
 export class DocumentController {
   constructor (private readonly documentService: DocumentService) { }
 
@@ -22,17 +26,17 @@ export class DocumentController {
       }),
     }),
   )
-  upload(@UploadedFile() file: Express.Multer.File) {
-    return this.documentService.upload();
+  upload(@UploadedFile() file: Express.Multer.File, @CurrentUser() user: User) {
+    return this.documentService.upload(file, user);
   }
 
-  @Get()
-  findAll() {
-    return this.documentService.findAll();
+  @Get("/my")
+  findMyDocuments(@CurrentUser("id") userId: string) {
+    return this.documentService.findMyDocuments(userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.documentService.findOne(+id);
+  @Delete("/:id")
+  delete(@Param("id") id: string) {
+    return this.documentService.delete(id);
   }
 }

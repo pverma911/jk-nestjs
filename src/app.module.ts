@@ -5,7 +5,6 @@ import { ConfigurationModule } from './config/configuration.module';
 import { OrmModule } from './modules/orm/orm.module';
 import { UserModule } from './modules/user/user.module';
 import { DocumentModule } from './modules/document/document.module';
-import { DocumentModule } from './modules/document/document.module';
 
 @Module({
   imports: [
