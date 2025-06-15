@@ -4,10 +4,12 @@ import {
     Column,
     BeforeInsert,
     BeforeUpdate,
+    OneToMany,
 } from 'typeorm';
 import { Entities } from './entity.enum';
 import { BaseEntity } from './base.enitity';
 import * as bcrypt from 'bcrypt';
+import { Document } from './document.entity';
 
 @Entity(Entities.USER)
 export class User extends BaseEntity {
@@ -26,6 +28,9 @@ export class User extends BaseEntity {
         default: UserRole.VIEWER,
     })
     role: UserRole;
+
+    @OneToMany(() => Document, (doc) => doc.uploadedBy)
+    documents: Document[];
 
     // Hash password before insert or update via hooks
     @BeforeInsert()
