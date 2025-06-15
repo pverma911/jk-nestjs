@@ -7,6 +7,7 @@ import { User } from 'src/entities/user.entity';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor (private readonly configService: ConfigurationService) {
+
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: configService.jwtSecret,
@@ -15,5 +16,5 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     async validate(payload: Partial<User>) {
         return { userId: payload.id, role: payload.role };
-    }
+    } 
 }

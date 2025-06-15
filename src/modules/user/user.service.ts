@@ -1,4 +1,4 @@
-import { Body, ConflictException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Body, ConflictException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { RegisterDto } from './dto/register.dto';
 import { ResponseService } from 'src/utils/response.utils';
@@ -6,6 +6,7 @@ import { LoginDto } from './dto/login.dto';
 import * as bcrypt from "bcrypt"
 import { JwtService } from '@nestjs/jwt';
 import { IServiceResponse } from 'src/interfaces/serviceResponse.interface';
+import { UpdateRoleDto } from './dto/updateRole.dto';
 
 /**
  * User Service
@@ -70,5 +71,29 @@ export class UserService extends ResponseService {
         const accessToken = this.jwtService.sign(jwtPayload);
 
         return this.serviceResponse(HttpStatus.OK, { accessToken }, "Logged In")
+    }
+
+    /**
+   * Updates the role of a user by their user ID.
+   * @param userId - The unique identifier of the user whose role is to be updated.
+   * @param payload - An object containing the new role for the user.
+   * @returns A service response indicating the result of the update operation.
+   * @throws NotFoundException if the user is not found.
+   */
+    async updateRole(userId: string, payload: UpdateRoleDto) {
+        const { role } = payload
+        const user = await this.userRepo.findById(userId);
+
+        if (!user) throw new NotFoundException('User not found');
+
+        user.role = role;
+
+        await this.userRepo.save(user);
+
+        return this.serviceResponse(HttpStatus.OK, {}, "User role has been updated")
+    }
+
+    async getUserRole(role: string) {
+        return this.serviceResponse(HttpStatus.OK, { role }, "User role has been updated")
     }
 }

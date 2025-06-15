@@ -10,7 +10,12 @@ export class UserRepository extends Repository<User> {
     constructor (private dataSource: DataSource) {
         super(User, dataSource.createEntityManager());
     }
+
     async findUserByEmail(email: string) {
         return this.findOneBy({ email })
+    }
+
+    async findById(id: string) {
+        return this.findOneBy({ id })
     }
 }

@@ -7,9 +7,12 @@ import { UserRepository } from './user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigurationModule } from 'src/config/configuration.module';
 import { ConfigurationService } from 'src/config/configuration.service';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from 'src/stratergies/jwt.stratergy';
 
 @Module({
     imports: [
+        PassportModule,
         TypeOrmModule.forFeature([User]),
         JwtModule.registerAsync({
             imports: [ConfigurationModule],
@@ -19,8 +22,9 @@ import { ConfigurationService } from 'src/config/configuration.service';
                 signOptions: { expiresIn: '5d' },
             }),
         }),
+        ConfigurationModule
     ],
     controllers: [UserController],
-    providers: [UserRepository, UserService],
+    providers: [UserRepository, UserService, JwtStrategy],
 })
 export class UserModule { }
