@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from './user.entity';
 import { BaseEntity } from './base.enitity';
-import { IngestionStatus } from 'src/modules/ingestion/ingestion.enum';
+import { IngestionStatus } from '../modules/ingestion/ingestion.enum';
 
 @Entity()
 export class Document extends BaseEntity {

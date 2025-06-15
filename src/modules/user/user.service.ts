@@ -1,11 +1,11 @@
 import { Body, ConflictException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { RegisterDto } from './dto/register.dto';
-import { ResponseService } from 'src/utils/response.utils';
+import { ResponseService } from '../../utils/response.utils';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from "bcrypt"
 import { JwtService } from '@nestjs/jwt';
-import { IServiceResponse } from 'src/interfaces/serviceResponse.interface';
+import { IServiceResponse } from '../../interfaces/serviceResponse.interface';
 import { UpdateRoleDto } from './dto/updateRole.dto';
 
 /**
@@ -93,7 +93,7 @@ export class UserService extends ResponseService {
         return this.serviceResponse(HttpStatus.OK, {}, "User role has been updated")
     }
 
-    async getUserById(id:string){
+    async getUserById(id: string) {
         return this.userRepo.findById(id);
     }
 
@@ -104,6 +104,6 @@ export class UserService extends ResponseService {
  * @returns {Promise<object>} A promise that resolves to a service response containing the user's role and a success message.
  */
     getUserRole(role: string) {
-        return this.serviceResponse(HttpStatus.OK, { role }, "User role has been updated")
+        return this.serviceResponse(HttpStatus.OK, { role }, "User role fetched")
     }
 }

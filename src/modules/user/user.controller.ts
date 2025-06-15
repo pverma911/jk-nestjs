@@ -3,12 +3,10 @@ import { RegisterDto } from './dto/register.dto';
 import { UserService } from './user.service';
 import { LoginDto } from './dto/login.dto';
 import { UpdateRoleDto } from './dto/updateRole.dto';
-import { CurrentUser } from 'src/decorators/user.decorator';
-import { User } from 'src/entities/user.entity';
-import { AuthGuard } from '@nestjs/passport';
-import { JwtAuthGuard } from 'src/guards/jwt.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/role.decorator';
+import { CurrentUser } from '../../decorators/user.decorator';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
+import { RolesGuard } from '../../guards/roles.guard';
+import { Roles } from '../../decorators/role.decorator';
 import { UserRole } from './user.enum';
 
 /**
