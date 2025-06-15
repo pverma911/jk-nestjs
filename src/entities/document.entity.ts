@@ -19,6 +19,9 @@ export class Document extends BaseEntity {
     @Column()
     path: string;
 
+    @Column({ nullable: true })
+    description: string;
+
     @ManyToOne(() => User, (user) => user.documents)
     uploadedBy: User;
 }

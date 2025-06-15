@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, UseInterceptors, UploadedFile, UseGuards, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Param, UseInterceptors, UploadedFile, UseGuards, Delete, Res, Patch, Body } from '@nestjs/common';
 import { DocumentService } from './document.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -7,10 +7,12 @@ import * as crypto from "crypto"
 import { CurrentUser } from 'src/decorators/user.decorator';
 import { User } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { Response } from 'express';
+import { UpdateDocumentDto } from './dto/updateDocument.dto';
 
 
 @Controller('documents')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class DocumentController {
   constructor (private readonly documentService: DocumentService) { }
 
@@ -38,5 +40,15 @@ export class DocumentController {
   @Delete("/:id")
   delete(@Param("id") id: string) {
     return this.documentService.delete(id);
+  }
+
+  @Get("/:id")
+  fetchFile(@Param("id") id: string, @Res({ passthrough: true }) res: Response) {
+    return this.documentService.fetchFile(id, res);
+  }
+
+  @Patch("/:id")
+  update(@Param("id") id: string, @Body() updateDocumentDto: UpdateDocumentDto) {
+    return this.documentService.update(id, updateDocumentDto);
   }
 }
