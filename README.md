@@ -3,7 +3,8 @@
 
 A scalable backend application built with [NestJS](https://nestjs.com/), [PostgreSQL](https://www.postgresql.org/), and [TypeORM](https://typeorm.io/). Includes modular structure, authentication with JWT, role-based access, and Swagger documentation.
 
-*NOTE*: I Recommend to use Postman for API Documentation : https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da
+*NOTE*: I Recommend to use Postman for API Documentation :
+[https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da](https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da)
 ---
 
 ## 🚀 Features
@@ -237,5 +238,6 @@ pm2 start dist/main.js
 **Pranshu Verma**
 💼 [LinkedIn](https://www.linkedin.com/in/pranshuverma-sde)
 🖥️ [GitHub](https://github.com/pverma911)
+📝 [My Resume](https://drive.google.com/file/d/1hE7ArwmBKL4kXfTB8o43PysXDzcf1fc3/view?usp=sharing)
 
 ---
