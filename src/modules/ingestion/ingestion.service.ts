@@ -63,7 +63,7 @@ export class IngestionService extends ResponseService {
             }
 
             await this.documentRepo.save(doc);
-        }, 4000);
+        }, 6000);
     }
 
 }
