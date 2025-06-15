@@ -7,6 +7,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse<Response>();
         let status = HttpStatus.INTERNAL_SERVER_ERROR
+        let exceptionResponse = {} as any
+        let message = "Something Went Wrong!"
 
         // If exception has getStatus, use it
         if (
@@ -15,12 +17,24 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ) {
             status = exception.getStatus();
         }
-        const exceptionResponse = exception.getResponse() as any
+        if (
+            exception instanceof HttpException ||
+            (typeof exception.getResponse === 'function')
+        ) {
+            exceptionResponse = exception.getResponse() as any
+        }
 
+        if (status === HttpStatus.BAD_REQUEST) {
+            message = exceptionResponse.message[0]
+        } else {
+            message = exceptionResponse.message ?? message
+        }
+
+        console.error('Caught Exception:', exception);
         response.status(status).json({
             statusCode: status,
             success: false,
-            message: status === HttpStatus.BAD_REQUEST ? exceptionResponse.message[0] : exceptionResponse.message,
+            message,
             data: {}
         });
     }
