@@ -22,9 +22,9 @@ export class DocumentService extends ResponseService {
       uploadedBy: user,
     });
 
-    await this.documentRepo.save(doc);
+    const {id} =await this.documentRepo.save(doc);
 
-    return this.serviceResponse(HttpStatus.CREATED, {}, "Document uploaded")
+    return this.serviceResponse(HttpStatus.CREATED, {docId:id}, "Document uploaded")
   }
 
   async findAll() {

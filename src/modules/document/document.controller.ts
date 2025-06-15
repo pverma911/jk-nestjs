@@ -12,7 +12,7 @@ import { UpdateDocumentDto } from './dto/updateDocument.dto';
 
 
 @Controller('documents')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class DocumentController {
   constructor (private readonly documentService: DocumentService) { }
 

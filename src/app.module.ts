@@ -5,6 +5,7 @@ import { ConfigurationModule } from './config/configuration.module';
 import { OrmModule } from './modules/orm/orm.module';
 import { UserModule } from './modules/user/user.module';
 import { DocumentModule } from './modules/document/document.module';
+import { IngestionModule } from './modules/ingestion/ingestion.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { DocumentModule } from './modules/document/document.module';
     OrmModule,
     UserModule,
     DocumentModule,
+    IngestionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
