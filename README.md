@@ -128,6 +128,8 @@ docker run --name postgres-jk -e POSTGRES_PASSWORD=your_db_password -p 5432:5432
 ```bash
 npm run start:dev
 ```
+* NOTE: Please comment out these two lines in main.ts file to seed upto x users in database.
+![image](https://github.com/user-attachments/assets/0d76ec81-fa4b-4efb-a91a-c99577172fb8)
 
 Visit:
 
