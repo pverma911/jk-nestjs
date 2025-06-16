@@ -1,98 +1,245 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 📦 JK NestJS Backend Project
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A scalable backend application built with [NestJS](https://nestjs.com/), [PostgreSQL](https://www.postgresql.org/), and [TypeORM](https://typeorm.io/). Includes modular structure, authentication with JWT, role-based access, and Swagger documentation.
 
-## Description
+*NOTE*: I Recommend to use Postman for API Documentation :
+[https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da](https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da)
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Features
 
-## Project setup
+* Modular architecture (`User`, `Document`, `Ingestion` modules)
+* PostgreSQL with TypeORM integration
+* Secure authentication using JWT
+* Role-based access control (RBAC)
+* File upload handling with Multer
+* Global exception handling
+* Swagger API documentation
+* DTO validation using class-validator
+* Easily testable with Jest
 
-```bash
-$ npm install
+---
+
+## 📁 Folder Structure Overview
+
+```
+├── src/                       # Main source code of the application
+│   ├── config/                # Configuration files (e.g., database, JWT, etc.)
+│   ├── decorators/            # Custom decorators used across the app
+│   ├── entities/              # TypeORM entity definitions (database models)
+│   ├── filters/               # Global or route-specific exception filters
+│   ├── guards/                # Authorization guards (e.g., roles, auth)
+│   ├── interfaces/            # Shared TypeScript interfaces
+│   ├── modules/               # Feature modules (user, document, ingestion, etc.)
+│   ├── strategies/            # Passport JWT strategies
+│   ├── utils/                 # Utility/helper functions or services
+│   ├── app.module.ts          # Root module of the application
+│   └── main.ts                # Entry point of the application (bootstraps Nest app)
+├── test/                      # Test utilities or global test setup
+├── uploads/                   # Uploaded files directory
+├── .env                       # Environment variables file (local use)
+├── .env.example               # Example env file for reference or sharing
+├── .gitignore                 # Git ignore rules
+├── .prettierrc                # Prettier code formatting configuration
+├── eslint.config.mjs          # ESLint configuration
+├── nest-cli.json              # NestJS CLI configuration
+├── package-lock.json          # Auto-generated lock file for npm
+├── package.json               # Project metadata and dependencies
+├── README.md                  # Project documentation and usage instructions
+├── tsconfig.build.json        # TypeScript config for building the project
+└── tsconfig.json              # TypeScript base configuration
+
 ```
 
-## Compile and run the project
+---
+
+## 🧰 Prerequisites
+
+* [Node.js](https://nodejs.org/) (v19+)
+* [PostgreSQL](https://www.postgresql.org/) (v13+)
+* npm or yarn
+* Git
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/pverma911/jk-nestjs.git
+cd jk-nestjs
 ```
 
-## Run tests
+---
+
+### 2. Install Dependencies
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
+# OR
+yarn install
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### 3. Configure Environment Variables
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Create a `.env` file using the example:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cp .env.example .env
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Edit `.env` with your local PostgreSQL and JWT config:
 
-## Resources
+```
+APP_PORT=8080
+DB_HOST=localhost
+DB_NAME=jk_psql
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=12345
+JWT_SECRET =a92fd48e30d2b6e19c4a9a52fbd5d2757f0d3d6d58ec58e6c1f6e8d8f0ad50c3a4d6a1f1ea1c8a87419a991e7d10346f4cd71a7a36597e8124d9d71b0a2a79b0
 
-Check out a few resources that may come in handy when working with NestJS:
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+### 4. Set Up PostgreSQL Database
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### Option A: Using SQL CLI
 
-## Stay in touch
+```sql
+CREATE DATABASE jk_docs;
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Option B: Using Docker (optional)
 
-## License
+```bash
+docker run --name postgres-jk -e POSTGRES_PASSWORD=your_db_password -p 5432:5432 -d postgres
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+### 5. Run the App Locally
+
+```bash
+npm run start:dev
+```
+* <h3> NOTE: Please comment out these two lines in main.ts file to seed upto x users in database.</h3>
+![image](https://github.com/user-attachments/assets/0d76ec81-fa4b-4efb-a91a-c99577172fb8)
+
+Visit:
+
+* Postman API Doc [https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da](https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da)
+
+* Swagger UI: [http://localhost:3000/api](http://localhost:3000/api)
+
+---
+
+### 6. Available NPM Scripts
+
+| Command      | Description                  |
+| ------------ | ---------------------------- |
+| `start:dev`  | Start app in dev mode        |
+| `start:prod` | Start app in production mode |
+| `test`       | Run unit tests               |
+| `test:watch` | Watch and run unit tests     |
+| `test:cov`   | Show test coverage           |
+| `build`      | Compile the app              |
+| `format`     | Format code with Prettier    |
+
+---
+
+## 🧪 Running Tests
+
+```bash
+npm run test
+```
+
+For code coverage:
+
+```bash
+npm run test:cov
+```
+
+---
+
+## 🔐 API Authentication
+
+* Register: `POST /user/register`
+* Login: `POST /user/login`
+* Use the returned `accessToken` in headers:
+
+  ```
+  Authorization: Bearer <token>
+  ```
+
+---
+
+## 📘 Swagger/Postman API Docs[Postman Recommended]
+
+```Postman URL
+https://documenter.getpostman.com/view/10717273/2sB2x8DqxL#ea867516-15bb-4816-ba0d-e6e5123e53da
+```
+Open the URL and click on run on postman in top right.
+
+```http
+http://localhost:3000/api
+```
+
+Generated using `@nestjs/swagger`. Includes request/response schema and role-based route protection.
+
+---
+
+## 🗂 Sample API Response Format
+
+```json
+{
+  "statusCode": 201,
+  "success": true,
+  "message": "Please proceed to login",
+  "data": {
+    "userId": "uuid"
+  }
+}
+```
+
+Consistently returned using `ResponseService`.
+
+---
+
+## 🚀 Deployment Instructions
+
+### 1. Build the App
+
+```bash
+npm run build
+```
+
+### 2. Set up `.env` on your server (same as local)
+
+### 3. Run with Node
+
+```bash
+node dist/main.js
+```
+
+### 4. (Optional) Use PM2 or Docker for production
+
+```bash
+npm install -g pm2
+pm2 start dist/main.js
+```
+---
+
+## 🧑‍💻 Author
+
+**Pranshu Verma**
+💼 [LinkedIn](https://www.linkedin.com/in/pranshuverma-sde)
+🖥️ [GitHub](https://github.com/pverma911)
+📝 [My Resume](https://drive.google.com/file/d/1hE7ArwmBKL4kXfTB8o43PysXDzcf1fc3/view?usp=sharing)
+
+---
