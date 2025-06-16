@@ -7,6 +7,8 @@ import * as bcrypt from "bcrypt"
 import { JwtService } from '@nestjs/jwt';
 import { IServiceResponse } from '../../interfaces/serviceResponse.interface';
 import { UpdateRoleDto } from './dto/updateRole.dto';
+import { UserRole } from './user.enum';
+import { faker } from '@faker-js/faker';
 
 /**
  * User Service
@@ -106,4 +108,25 @@ export class UserService extends ResponseService {
     getUserRole(role: string) {
         return this.serviceResponse(HttpStatus.OK, { role }, "User role fetched")
     }
+
+    async seedUsers(count = 100): Promise<void> {
+        const roles = Object.values(UserRole);
+
+        const users = await Promise.all(
+            Array.from({ length: count }).map(async () => {
+                const password = await bcrypt.hash(faker.internet.password(), 10);
+
+                return this.userRepo.create({
+                    name: faker.person.fullName(),
+                    email: faker.internet.email(),
+                    password,
+                    role: roles[Math.floor(Math.random() * roles.length)],
+                });
+            }),
+        );
+
+        await this.userRepo.save(users);
+        console.log(`${count} users seeded successfully.`);
+    }
+
 }

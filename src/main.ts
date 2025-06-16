@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './filters/allException.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { UserService } from './modules/user/user.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,6 +29,9 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  // const userService = app.get(UserService);
+  // await userService.seedUsers(); // <== manually call seeder
 
   await app.listen(process.env.APP_PORT ?? 3000);
 }
