@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, InternalServerErrorException, NotFoundException, StreamableFile } from '@nestjs/common';
-import { User } from 'src/entities/user.entity';
+import { User } from '../../entities/user.entity';
 import { DocumentRepository } from './document.repository';
-import { ResponseService } from 'src/utils/response.utils';
+import { ResponseService } from '../../utils/response.utils';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import * as fsNative from 'fs';

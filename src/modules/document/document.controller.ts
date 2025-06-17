@@ -4,13 +4,13 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as crypto from "crypto"
-import { CurrentUser } from 'src/decorators/user.decorator';
-import { User } from 'src/entities/user.entity';
-import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { CurrentUser } from '../../decorators/user.decorator';
+import { User } from '../../entities/user.entity';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
 import { Response } from 'express';
 import { UpdateDocumentDto } from './dto/updateDocument.dto';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/role.decorator';
+import { RolesGuard } from '../../guards/roles.guard';
+import { Roles } from '../../decorators/role.decorator';
 import { UserRole } from '../user/user.enum';
 
 /**

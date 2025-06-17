@@ -1,8 +1,8 @@
 import { Controller, Post, Get, Param, UseGuards } from '@nestjs/common';
 import { IngestionService } from './ingestion.service';
-import { JwtAuthGuard } from 'src/guards/jwt.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Roles } from 'src/decorators/role.decorator';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
+import { RolesGuard } from '../../guards/roles.guard';
+import { Roles } from '../../decorators/role.decorator';
 import { UserRole } from '../user/user.enum';
 
 @UseGuards(JwtAuthGuard, RolesGuard)

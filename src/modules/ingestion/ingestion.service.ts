@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
-import { ResponseService } from 'src/utils/response.utils';
+import { ResponseService } from '../../utils/response.utils';
 import { DocumentRepository } from '../document/document.repository';
 import { IngestionStatus } from './ingestion.enum';
-import { Document } from 'src/entities/document.entity';
+import { Document } from '../../entities/document.entity';
 
 @Injectable()
 export class IngestionService extends ResponseService {
@@ -38,7 +38,7 @@ export class IngestionService extends ResponseService {
         }, "Ingestion Status");
     }
 
-    private async simulateIngestion(doc: Document, attempt = 1) {
+    async simulateIngestion(doc: Document, attempt = 1) {
         const MAX_RETRIES = 3;
 
         setTimeout(async () => {
@@ -65,5 +65,4 @@ export class IngestionService extends ResponseService {
             await this.documentRepo.save(doc);
         }, 6000);
     }
-
 }

@@ -1,6 +1,6 @@
 import { DataSource, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { Document } from 'src/entities/document.entity';
+import { Document } from '../../entities/document.entity';
 
 /**
  * Document Repository
